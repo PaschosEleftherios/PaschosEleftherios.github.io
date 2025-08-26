@@ -1,204 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P1HHN1V4CZ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-P1HHN1V4CZ');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0
-    maximum-scale=1, minimum-scale=1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
-    <title>Paschos Eleftherios</title>
-    <link rel="stylesheet" type="text/css" href="default.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eleftherios Paschos · REST API & Full-Stack Engineer</title>
+  <meta name="description" content="RESTful API and Full-Stack developer — Python/Django REST, Node/Express, React. Building secure, scalable services on PostgreSQL & Azure. See case studies, skills, projects, and contact."/>
+  <link rel="canonical" href="https://paschoseleftherios.github.io/" />
+  <meta property="og:title" content="Eleftherios Paschos · REST API & Full-Stack Engineer" />
+  <meta property="og:description" content="API-first developer: DRF, Express, PostgreSQL, Azure. Selected projects and results." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <link id="theme-style" rel="stylesheet" type="text/css" href="">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚙️</text></svg>">
+
+  <!-- Lightweight, accessible, no external fonts for performance -->
+  <style>
+    :root{
+      --bg: #0b1020;        /* dark */
+      --panel: #12172b;
+      --ink: #e6e9f2;
+      --muted: #a6b0cf;
+      --brand: #7c5cff;
+      --accent: #19c37d;
+      --chip: #1e2440;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f7fb; --panel:#ffffff; --ink:#0b1020; --muted:#3d4669; --chip:#eef1ff; }
+    }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink); background: radial-gradient(1200px 800px at 10% -10%, rgba(124,92,255,.18), transparent 40%),
+                         radial-gradient(1000px 600px at 120% 10%, rgba(25,195,125,.12), transparent 35%), var(--bg);
+    }
+    a{ color:var(--brand); text-decoration:none }
+    a:hover{ text-decoration:underline }
+    img{ max-width:100%; display:block }
+    .wrap{ max-width:1100px; margin:0 auto; padding:24px }
+    .skip{ position:absolute; left:-9999px }
+    .skip:focus{ left:24px; top:12px; background:var(--accent); color:#000; padding:8px 10px; border-radius:8px }
+
+    header{ position:sticky; top:0; backdrop-filter:saturate(120%) blur(8px); background: rgba(11,16,32,.6); z-index:5; border-bottom:1px solid rgba(255,255,255,.06) }
+    nav{ display:flex; align-items:center; justify-content:space-between; gap:16px }
+    .brand{ display:flex; align-items:center; gap:12px }
+    .brand img{ width:42px; height:42px; border-radius:50%; box-shadow: var(--shadow) }
+    .brand h1{ font-size:18px; margin:0; letter-spacing:.3px }
+    .navlinks{ display:flex; gap:18px; flex-wrap:wrap }
+    .btn{ display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:999px; background:var(--brand); color:#fff; box-shadow: var(--shadow); border:0; cursor:pointer }
+    .btn.alt{ background:var(--chip); color:var(--ink); border:1px solid rgba(255,255,255,.08) }
+
+    .hero{ display:grid; grid-template-columns: 1.2fr .8fr; gap:28px; align-items:center; padding-block:36px }
+    .hero h2{ font-size: clamp(28px, 4.5vw, 48px); margin:.2em 0 }
+    .kicker{ display:inline-block; background:linear-gradient(90deg, var(--brand), var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:700; letter-spacing:.6px }
+    .tagline{ color:var(--muted) }
+    .hero-card{ background:var(--panel); border-radius: var(--radius); padding:18px; box-shadow: var(--shadow); border:1px solid rgba(255,255,255,.06) }
+    .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px }
+    .chip{ background:var(--chip); color:var(--ink); border:1px solid rgba(255,255,255,.08); padding:6px 10px; border-radius:999px; font-size:14px }
+
+    section{ padding-block: 36px }
+    h3{ font-size: clamp(18px, 2.5vw, 26px); margin:0 0 12px 0 }
+    .grid{ display:grid; gap:18px }
+    .grid.cards{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) }
+    .card{ background:var(--panel); border-radius: var(--radius); padding:18px; box-shadow: var(--shadow); border:1px solid rgba(255,255,255,.06) }
+    .card h4{ margin:.2em 0 .4em }
+    .meta{ color:var(--muted); font-size:14px }
+    .list{ padding-left:18px; margin:0 }
+    .list li{ margin:.35em 0 }
+
+    .timeline{ position:relative; padding-left:26px }
+    .timeline::before{ content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(var(--brand), var(--accent)) }
+    .titem{ position:relative; margin:18px 0; padding-left:6px }
+    .titem::before{ content:""; position:absolute; left:-8px; top:.35em; width:12px; height:12px; border-radius:50%; background:var(--brand); box-shadow:0 0 0 4px rgba(124,92,255,.2) }
+
+    .projects .card img{ border-radius:12px; aspect-ratio: 16/9; object-fit:cover }
+    .projects .actions{ display:flex; gap:10px; margin-top:10px }
+
+    .contact{ display:grid; grid-template-columns: 1fr; gap:12px }
+    .contact a{ word-break: break-word }
+
+    footer{ padding:32px 0; color:var(--muted); text-align:center; border-top:1px solid rgba(255,255,255,.06) }
+
+    /* Small screens */
+    @media (max-width: 820px){
+      .hero{ grid-template-columns: 1fr; }
+      .navlinks{ display:none }
+    }
+  </style>
+
+  <!-- Structured data for better search & rich results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Eleftherios Paschos",
+    "jobTitle": "Software Engineer (REST APIs & Full-Stack)",
+    "url": "https://paschoseleftherios.github.io/",
+    "image": "https://paschoseleftherios.github.io/images/1.jpg",
+    "email": "mailto:plefterhs@gmail.com",
+    "telephone": "+306972805972",
+    "sameAs": [
+      "https://www.linkedin.com/in/eleftherios-paschos-651344254/",
+      "https://github.com/PaschosEleftherios"
+    ],
+    "knowsAbout": ["REST", "OpenAPI", "Django REST Framework", "Express.js", "PostgreSQL", "Azure", "CI/CD", "Docker", "React"]
+  }
+  </script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-    <section class="s1">
-        <div class="main-container">
-            <div class="greeting-wrapper">
-                <h1>Hello, I'm Eleftherios Paschos</h1>
-            </div>
-
-
-            <div class="intro-wrapper">
-                <div class="nav-wrapper">
-                    <div class="dots-wrapper">
-                        <div id="dot-1" class="browser-dot"></div>
-                        <div id="dot-2" class="browser-dot"></div>
-                        <div id="dot-3" class="browser-dot"></div>
-                    </div>
-                    <ul id="navigation">
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="left-column">
-                    <img id="profile_pic" src="images/1.jpg">
-                    <h5 style="text-align: center;line-height: 0;">Personalize Theme</h5>
-
-                    <div id="theme-options-wrapper">
-                        <div data-mode="light" id="light-mode" class="theme-dot"></div>
-                        <div data-mode="blue" id="blue-mode" class="theme-dot"></div>
-                        <div data-mode="green" id="green-mode" class="theme-dot"></div>
-                        <div data-mode="purple" id="purple-mode" class="theme-dot"></div>
-                    </div>
-                    <p id="settings-note">*Theme settings will be saved <br>for you next visit.</p>
-                </div>
-                <div class="right-column">
-                    <div id="preview-shadow">
-                        <div id="preview">
-                            <div id="corner-tl" class="corner"></div>
-                            <div id="corner-tr" class="corner"></div>
-                            <h3>Who am I</h3>
-                            <p>I am a software engineer, highly interested in web development
-                            and machine learning topics.</p>
-                            <div id="corner-bl" class="corner"></div>
-                            <div id="corner-br" class="corner"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Primary">
+        <div class="brand">
+          <img src="images/1.jpg" alt="Portrait of Eleftherios Paschos"/>
+          <h1>Eleftherios Paschos</h1>
         </div>
+        <div class="navlinks" role="navigation">
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <a class="btn alt" href="epaschos_resume.pdf" download>Download Resume</a>
+        </div>
+        <button class="btn" id="themeToggle" aria-label="Toggle theme">Toggle Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="intro-heading">
+      <div>
+        <span class="kicker">RESTful API • Full-Stack</span>
+        <h2 id="intro-heading">I build secure, scalable APIs and ship polished web apps.</h2>
+        <p class="tagline">Python/Django REST & Node/Express on PostgreSQL • React front-ends • Azure cloud • CI/CD with GitHub Actions • Dockerized dev/test. I care about clean architecture, performance, and DX.</p>
+        <div class="chips" aria-label="Highlights">
+          <span class="chip">OpenAPI-first</span>
+          <span class="chip">Auth: JWT/OAuth2</span>
+          <span class="chip">Caching: Redis</span>
+          <span class="chip">Testing: pytest/Jest</span>
+          <span class="chip">Observability</span>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Fast facts">
+        <h3>Fast facts</h3>
+        <ul class="list">
+          <li><strong>4+ years</strong> engineering, incl. Deloitte Digital & Python tutoring.</li>
+          <li><strong>Salesforce experience</strong> integrating APIs with cloud apps.</li>
+          <li><strong>MEng</strong> in Computer Science & Engineering (University of Ioannina).</li>
+        </ul>
+        <div class="chips">
+          <a class="btn alt" href="https://www.linkedin.com/in/eleftherios-paschos-651344254/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn alt" href="https://github.com/PaschosEleftherios" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </aside>
     </section>
 
-    <section class="s2">
-        <div class="main-container">
-            <div class="about-wrapper">
-                <div class="about-me">
-                    <h4>More about me</h4>
-
-                    <p>I am passionate about web development and actively pursue opportunities to learn new frameworks and technologies.
-                    I enjoy collaborating on coding projects with peers, applying my skills to practical, real-world scenarios.</p>
-
-                    <p>While I stay engaged with these activities,
-                    I also focus on studying for Salesforce certifications and deepening my knowledge of Salesforce development, which is my current professional role.</p>
-
-
-                    <hr>
-
-                    <h4>TOP EXPERTISE</h4>
-
-                    <p>With a strong foundation in both web development and Salesforce technologies,
-                    here are the key areas where I excel: <a target="_blank" href="epaschos_resume.pdf">Download Resume</a></p>
-
-                    <div id="skills">
-                        <ul>
-                            <li>Python</li>
-                            <li>Java</li>
-                            <li>Apex</li>
-                            <li>C</li>
-                            <li>Javascript</li>
-                            <li>Html/CSS</li>
-                            <li>SQL</li>
-                        </ul>
-
-                        <ul>
-                            <li>Salesforce</li>
-                            <li>Django</li>
-                            <li>Django Rest Framework</li>
-                            <li>React</li>
-                            <li>Vue</li>
-                            <li>Microsoft Azure</li>
-                            <li>API Development</li>
-                        </ul>
-                    </div>
-
-                </div>
-
-
-                <div class="social-links">
-                   <img id="social_img" src="images/followme.png" >
-                   <h3>Reach me on Linkedin & Github</h3>
-                   <a target="_blank" href="https://www.linkedin.com/in/eleftherios-paschos-651344254/">Linkedin: Eleftherios Paschos</a>
-                   <br>
-                   <a target="_blank" href="https://github.com/PaschosEleftherios">GitHub: PaschosEleftherios</a>
-                </div>
-
-            </div>
-        </div>
+    <!-- Skills -->
+    <section id="skills" aria-labelledby="skills-heading">
+      <h3 id="skills-heading">Core skills</h3>
+      <div class="grid cards">
+        <article class="card" aria-labelledby="api-title">
+          <h4 id="api-title">API / Back-End</h4>
+          <p class="meta">Python (Django, DRF), Node (Express), Java; PostgreSQL & SQL; Redis; Celery/Workers; Webhooks; Rate limiting; Pagination; Validation; OpenAPI/Swagger.</p>
+        </article>
+        <article class="card" aria-labelledby="frontend-title">
+          <h4 id="frontend-title">Front-End</h4>
+          <p class="meta">React, modern JS/TS, accessibility, responsive UI, forms, fetch/axios clients, RTL tests.</p>
+        </article>
+        <article class="card" aria-labelledby="devops-title">
+          <h4 id="devops-title">DevOps / Cloud</h4>
+          <p class="meta">Azure (Functions, App Service, Storage, AI), Docker, GitHub Actions, CI/CD, monitoring, Postman collections.</p>
+        </article>
+        <article class="card" aria-labelledby="quality-title">
+          <h4 id="quality-title">Quality & Security</h4>
+          <p class="meta">12× Salesforce certs, code reviews, lint/format, unit/integration tests, auth flows (JWT/OAuth2), secrets management.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="s1">
-        <div class="main-container">
-            <h3 style="text-align: center;">Projects & Certifications</h3>
-
-            <div class="post-wrapper">
-
-                <div>
-                    <div class="post">
-                        <img class="thumbnail" src="images/blog.jpg">
-                        <div class="post-preview">
-                            <h6 class="post-title">Personal Blog</h6>
-                            <p class="post-intro">A personal blog with comment functionality and read later functionality .</p>
-                            <a href="https://github.com/PaschosEleftherios/django_blog">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="post">
-                        <img class="thumbnail" src="images/api.png">
-                        <div class="post-preview">
-                            <h6 class="post-title">Rest API</h6>
-                            <p class="post-intro">A recipe-app Rest API, using postgresql as the database and django rest framework.</p>
-                            <a href="https://github.com/PaschosEleftherios/recipe-app-api">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="post">
-                        <img class="thumbnail" src="images/certs.png">
-                        <div class="post-preview">
-                            <h6 class="post-title">Salesforce Certifications</h6>
-                            <p class="post-intro">A current view of all my salesforce certifications and achievements.</p>
-                            <a href="https://www.salesforce.com/trailblazer/n332ac6822evcrgbfh">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+    <!-- Experience timeline -->
+    <section id="experience" aria-labelledby="exp-heading">
+      <h3 id="exp-heading">Experience</h3>
+      <div class="timeline">
+        <div class="titem">
+          <h4>Deloitte Digital — Software Engineer <span class="meta">(2022–Present)</span></h4>
+          <ul class="list">
+            <li>Designed reusable, abstracted components and services; emphasized maintainability and performance.</li>
+            <li>Built AI-powered internal tools (Vue front-ends, Azure Functions back-ends).</li>
+            <li>Collaborated with cross-functional teams; wrote docs and automated tests.</li>
+          </ul>
         </div>
+        <div class="titem">
+          <h4>ComputerMathematica — Python Tutor <span class="meta">(2020–2022)</span></h4>
+          <ul class="list">
+            <li>Delivered lectures and hands-on labs; authored coursework and grading rubrics.</li>
+            <li>Mentored students on Python fundamentals and backend patterns.</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <section class="s2">
-        <div class="main-container">
-            <h3 style="text-align: center;">Get In Touch</h3>
-            <a name="contact"></a>
-            <div class="contact-wrapper">
-                <div class="contact-item">
-                    <img src="images/phone.png" alt="Phone" class="contact-icon">
-                    <span>+306972805972</span>
-                </div>
-                <div class="contact-item">
-                    <img src="images/linkedin.png" alt="LinkedIn" class="contact-icon">
-                    <a href="https://www.linkedin.com/in/eleftherios-paschos-651344254/" target="_blank" title="LinkedIn">
-                        LinkedIn
-                    </a>
-                </div>
-                <div class="contact-item">
-                    <img src="images/github.png" alt="GitHub" class="contact-icon">
-                    <a href="https://github.com/PaschosEleftherios" target="_blank" title="GitHub">
-                        GitHub
-                    </a>
-                </div>
-                <div class="contact-item">
-                    <img src="images/email.png" alt="Email" class="contact-icon">
-                    <span>plefterhs@gmail.com</span>
-                </div>
-            </div>
-        </div>
+    <!-- Projects -->
+    <section id="projects" class="projects" aria-labelledby="proj-heading">
+      <h3 id="proj-heading">Selected projects</h3>
+      <div class="grid cards">
+        <article class="card">
+          <img src="images/api.png" alt="API project cover"/>
+          <h4>Recipe App — REST API</h4>
+          <p class="meta">Django REST + PostgreSQL. Token auth, image upload, filtering, pagination, CI with GitHub Actions, Dockerized dev/test.</p>
+          <div class="actions">
+            <a class="btn alt" href="https://github.com/PaschosEleftherios/recipe-app-api" target="_blank" rel="noopener">Source</a>
+            <a class="btn alt" href="https://hub.docker.com/" target="_blank" rel="noopener">Docker (example)</a>
+          </div>
+        </article>
+        <article class="card">
+          <img src="images/blog.jpg" alt="Personal blog screenshot"/>
+          <h4>Personal Blog</h4>
+          <p class="meta">Full-stack blog with comments & reading list. Focus on clean URL design, caching, and secure forms.</p>
+          <div class="actions">
+            <a class="btn alt" href="https://github.com/PaschosEleftherios/django_blog" target="_blank" rel="noopener">Source</a>
+          </div>
+        </article>
+        <article class="card">
+          <img src="images/certs.png" alt="Salesforce certifications"/>
+          <h4>Salesforce Certifications</h4>
+          <p class="meta">12x Salesforce certified. Integrations and data flows using platform APIs.</p>
+          <div class="actions">
+            <a class="btn alt" href="https://www.salesforce.com/trailblazer/n332ac6822evcrgbfh" target="_blank" rel="noopener">Trailblazer</a>
+          </div>
+        </article>
+      </div>
     </section>
-    <script type="text/javascript" src="script.js"></script>
+
+    <!-- API Playground (demo without backend: calls a public API) -->
+    <section aria-labelledby="playground-heading">
+      <h3 id="playground-heading">Small API playground</h3>
+      <div class="card">
+        <p class="meta">A tiny in-page REST client calling a public API (GitHub). Shows async fetch, error handling, and minimal UI.</p>
+        <label for="gh-user">GitHub user</label>
+        <input id="gh-user" aria-label="GitHub user" placeholder="e.g. PaschosEleftherios" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.15); background:var(--chip); color:var(--ink); margin:6px 0 10px"/>
+        <button class="btn" id="gh-go">Fetch Repos</button>
+        <pre id="gh-out" style="margin-top:12px; white-space:pre-wrap; background:var(--panel); padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.06)">Waiting…</pre>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact" aria-labelledby="contact-heading">
+      <h3 id="contact-heading">Get in touch</h3>
+      <div class="grid cards">
+        <div class="card">
+          <h4>Email</h4>
+          <a href="mailto:plefterhs@gmail.com">plefterhs@gmail.com</a>
+        </div>
+        <div class="card">
+          <h4>Phone</h4>
+          <a href="tel:+306972805972">+30 697 280 5972</a>
+        </div>
+        <div class="card">
+          <h4>LinkedIn</h4>
+          <a href="https://www.linkedin.com/in/eleftherios-paschos-651344254/" target="_blank" rel="noopener">/in/eleftherios-paschos-651344254</a>
+        </div>
+        <div class="card">
+          <h4>GitHub</h4>
+          <a href="https://github.com/PaschosEleftherios" target="_blank" rel="noopener">github.com/PaschosEleftherios</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> Eleftherios Paschos · Built with semantic HTML, accessible styles, and zero dependencies.</div>
+  </footer>
+
+  <script>
+    // Theme toggler (persisted)
+    const key = 'theme-pref-v1';
+    const btn = document.getElementById('themeToggle');
+    const apply = (mode) => {
+      document.documentElement.style.colorScheme = mode;
+      localStorage.setItem(key, mode);
+      btn.textContent = mode === 'dark' ? 'Light Mode' : 'Dark Mode';
+    };
+    const current = localStorage.getItem(key) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    apply(current);
+    btn.addEventListener('click', () => apply(document.documentElement.style.colorScheme === 'dark' ? 'light' : 'dark'));
+
+    // Year stamp
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mini REST client demo
+    const out = document.getElementById('gh-out');
+    document.getElementById('gh-go').addEventListener('click', async () => {
+      const user = document.getElementById('gh-user').value.trim();
+      if(!user){ out.textContent = 'Please enter a GitHub username.'; return; }
+      out.textContent = 'Loading…';
+      try{
+        const res = await fetch(`https://api.github.com/users/${encodeURIComponent(user)}/repos?per_page=5&sort=updated`);
+        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        out.textContent = data.length ? data.map(r => `• ${r.name} — ★ ${r.stargazers_count}`).join('\n') : 'No repos found.';
+      }catch(err){ out.textContent = 'Error: ' + err.message; }
+    });
+  </script>
 </body>
 </html>
