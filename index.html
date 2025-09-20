@@ -14,10 +14,11 @@
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚙️</text></svg>">
 
-  <!-- Lightweight, accessible, no external fonts for performance -->
+  <!-- Themeable CSS -->
   <style>
-    :root{
-      --bg: #0b1020;        /* dark */
+    /* Default (dark theme) */
+    :root {
+      --bg: #0b1020;
       --panel: #12172b;
       --ink: #e6e9f2;
       --muted: #a6b0cf;
@@ -27,9 +28,16 @@
       --shadow: 0 10px 25px rgba(0,0,0,.35);
       --radius: 18px;
     }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#f6f7fb; --panel:#ffffff; --ink:#0b1020; --muted:#3d4669; --chip:#eef1ff; }
+
+    /* Light theme overrides */
+    :root[data-theme="light"] {
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --ink: #0b1020;
+      --muted: #3d4669;
+      --chip: #eef1ff;
     }
+
     *{ box-sizing:border-box }
     html,body{ height:100% }
     body{
@@ -90,25 +98,6 @@
       .navlinks{ display:none }
     }
   </style>
-
-  <!-- Structured data for better search & rich results -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Eleftherios Paschos",
-    "jobTitle": "Software Engineer (REST APIs & Full-Stack)",
-    "url": "https://paschoseleftherios.github.io/",
-    "image": "https://paschoseleftherios.github.io/images/1.jpg",
-    "email": "mailto:plefterhs@gmail.com",
-    "telephone": "+306972805972",
-    "sameAs": [
-      "https://www.linkedin.com/in/eleftherios-paschos-651344254/",
-      "https://github.com/PaschosEleftherios"
-    ],
-    "knowsAbout": ["REST", "OpenAPI", "Django REST Framework", "Express.js", "PostgreSQL", "Azure", "CI/CD", "Docker", "React"]
-  }
-  </script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -184,7 +173,7 @@
       </div>
     </section>
 
-    <!-- Experience timeline -->
+    <!-- Experience -->
     <section id="experience" aria-labelledby="exp-heading">
       <h3 id="exp-heading">Experience</h3>
       <div class="timeline">
@@ -238,7 +227,7 @@
       </div>
     </section>
 
-    <!-- API Playground (demo without backend: calls a public API) -->
+    <!-- Playground -->
     <section aria-labelledby="playground-heading">
       <h3 id="playground-heading">Small API playground</h3>
       <div class="card">
@@ -254,22 +243,10 @@
     <section id="contact" class="contact" aria-labelledby="contact-heading">
       <h3 id="contact-heading">Get in touch</h3>
       <div class="grid cards">
-        <div class="card">
-          <h4>Email</h4>
-          <a href="mailto:plefterhs@gmail.com">plefterhs@gmail.com</a>
-        </div>
-        <div class="card">
-          <h4>Phone</h4>
-          <a href="tel:+306972805972">+30 697 280 5972</a>
-        </div>
-        <div class="card">
-          <h4>LinkedIn</h4>
-          <a href="https://www.linkedin.com/in/eleftherios-paschos-651344254/" target="_blank" rel="noopener">/in/eleftherios-paschos-651344254</a>
-        </div>
-        <div class="card">
-          <h4>GitHub</h4>
-          <a href="https://github.com/PaschosEleftherios" target="_blank" rel="noopener">github.com/PaschosEleftherios</a>
-        </div>
+        <div class="card"><h4>Email</h4><a href="mailto:plefterhs@gmail.com">plefterhs@gmail.com</a></div>
+        <div class="card"><h4>Phone</h4><a href="tel:+306972805972">+30 697 280 5972</a></div>
+        <div class="card"><h4>LinkedIn</h4><a href="https://www.linkedin.com/in/eleftherios-paschos-651344254/" target="_blank" rel="noopener">/in/eleftherios-paschos-651344254</a></div>
+        <div class="card"><h4>GitHub</h4><a href="https://github.com/PaschosEleftherios" target="_blank" rel="noopener">github.com/PaschosEleftherios</a></div>
       </div>
     </section>
   </main>
@@ -279,22 +256,27 @@
   </footer>
 
   <script>
-    // Theme toggler (persisted)
     const key = 'theme-pref-v1';
     const btn = document.getElementById('themeToggle');
+
     const apply = (mode) => {
-      document.documentElement.style.colorScheme = mode;
+      document.documentElement.setAttribute("data-theme", mode);
       localStorage.setItem(key, mode);
       btn.textContent = mode === 'dark' ? 'Light Mode' : 'Dark Mode';
     };
-    const current = localStorage.getItem(key) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    apply(current);
-    btn.addEventListener('click', () => apply(document.documentElement.style.colorScheme === 'dark' ? 'light' : 'dark'));
 
-    // Year stamp
+    const current = localStorage.getItem(key) ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    apply(current);
+
+    btn.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute("data-theme") === 'dark' ? 'light' : 'dark';
+      apply(next);
+    });
+
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mini REST client demo
     const out = document.getElementById('gh-out');
     document.getElementById('gh-go').addEventListener('click', async () => {
       const user = document.getElementById('gh-user').value.trim();
